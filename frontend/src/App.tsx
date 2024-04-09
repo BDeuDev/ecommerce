@@ -1,12 +1,16 @@
-import { useState } from 'react'
-import Navbar from './components/navbar'
+
+import { BrowserRouter as Router, Route, /* Link, */ Routes } from 'react-router-dom';
+import Home from './components/routes/home';
 
 function App() {
 
   return (
-    <>
-      <Navbar/>
-    </>
+    <Router>
+    <Routes>
+      <Route path='/' Component={Home}/>
+    </Routes>
+
+  </Router>
   )
 }
 
