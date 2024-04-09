@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 /* 
 interface SearchFormProps {
   onSubmit: (query: string) => void;
@@ -13,16 +14,16 @@ const SearchForm: React.FC/* <SearchFormProps> */ = (/* { onSubmit } */) => {
   }; */
 
   return (
-    <form /* onSubmit={handleSubmit} */ className="search-form">
+    <form /* onSubmit={handleSubmit} */ className="search-form ">
       <input
         type="text"
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="search-input"
+        className="search-input p-2 w-[350px] rounded-2xl"
       />
-      <button type="submit" className="search-button">
-        Search
+      <button type="submit" className="search-button absolute">
+        <SearchIcon/>
       </button>
     </form>
   );
