@@ -1,45 +1,48 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/free-mode";
-import { FreeMode, Pagination } from "swiper/modules";
-import { ServiceData } from "../gateways/index";
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-const Carrousel = () => {
+interface CarouselProps {
+  images: string[];
+  width?: string;
+}
+
+const Carousel: React.FC<CarouselProps> = ({ images, width = '100%' }) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    arrows:false,
+  };
+
+  const containerStyle: React.CSSProperties = {
+    maxWidth: width,
+    margin: '0 auto',
+    textAlign: 'center',
+  };
+
+  const imageStyle: React.CSSProperties = {
+    display: 'inline-block',
+    maxWidth: '100%',
+    height: 'auto',
+  };
+
   return (
-    <div className="flex items-center justify-center flex-col h-[700px]">
-      <Swiper
-        breakpoints={{
-          340: {
-            slidesPerView: 1,
-            spaceBetween: 15,
-          },
-          700: {
-            slidesPerView: 3,
-            spaceBetween: 15,
-          },
-        }}
-        freeMode={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[FreeMode, Pagination]}
-        className="max-w-[90%] "
-      >
-        {ServiceData.map((item) => (
-          <SwiperSlide key={item.title}>
-            <div className="flex flex-col gap-6 mb-20  relative shadow-lg text-white rounded-xl px-6 py-8  h-[800px] w-[400px] ml-auto mr-auto  overflow-hidden cursor-pointer">
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.backgroundImage})`, objectFit: 'cover', objectPosition: 'center' }}
-              >
-              </div>
-            </div>
-          </SwiperSlide>
+    <div style={containerStyle} className='relative top-[100px] '>
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <div key={index+1}>
+            <img src={image} alt={`slide-${index}`} style={imageStyle} className=' shadow-2xl' />
+          </div>
         ))}
-      </Swiper>
+      </Slider>
     </div>
   );
 };
 
-export default Carrousel;
+export default Carousel;

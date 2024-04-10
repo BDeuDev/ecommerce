@@ -1,9 +1,9 @@
 import SearchForm from "./searchForm";
-import { ShoppingCart, Store } from '@mui/icons-material';
+import { ShoppingCart, Store,AccountCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
-        <header className="w-full h-[100px] fixed top-0 bg-[#143D59] flex flex-row justify-center items-center">
+        <header className="z-10 w-full h-[100px] fixed top-0 bg-[#143D59] flex flex-row justify-center items-center shadow-xl">
             <div style={{ width: '115px', height: '75px', overflow: 'hidden' }} className="absolute left-4">
                 <img
                     className="cursor-pointer"
@@ -19,8 +19,10 @@ const Navbar = () => {
                 <Link to="/">
                     <Store className="text-white " style={{ fontSize: '40px' }} />
                 </Link>
-
-                <Link to={'/cart'} className="ml-8">
+                <Link to={'/login'}>
+                    <AccountCircle className="text-white ml-10" style={{ fontSize: '40px' }}/>
+                </Link>
+                <Link to={'/cart'} className="ml-10 mr-2">
                     <ShoppingCart className="text-white " style={{ fontSize: '40px' }} />
                 </Link>
             </nav>

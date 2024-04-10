@@ -14,20 +14,21 @@ const SearchForm: React.FC/* <SearchFormProps> */ = (/* { onSubmit } */) => {
   }; */
 
   return (
-    <form /* onSubmit={handleSubmit} */ className="search-form ">
-      <input
-        type="text"
-        placeholder="Search..."
-        maxLength={40}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="search-input p-2 w-[350px] rounded-2xl"
-      />
-      <span className='w-[0.5px] h-[32px] bg-[#0F0F0F] absolute -translate-x-12 translate-y-1'></span>
-      <button type="submit" className="search-button absolute -translate-x-8 translate-y-1">
-        <SearchIcon/>
-      </button>
-    </form>
+    <form className="search-form w-[350px] rounded-2xl bg-white focus-within:ring-[#00BFFF] ring-2 ring-opacity-50 relative">
+  <input
+    type="text"
+    placeholder="Search..."
+    maxLength={40}
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+    className="search-input p-2 w-[300px] rounded-2xl outline-none"
+  />
+  <span className='w-[0.5px] h-[32px] bg-[#0F0F0F] absolute translate-x-2 translate-y-1'></span>
+  <button type="submit" className="search-button absolute translate-x-4 translate-y-1">
+    <SearchIcon/>
+  </button>
+</form>
+
   );
 };
 
