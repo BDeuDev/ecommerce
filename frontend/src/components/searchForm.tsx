@@ -23,7 +23,7 @@ const SearchForm: React.FC/* <SearchFormProps> */ = (/* { onSubmit } */) => {
     onChange={(e) => setQuery(e.target.value)}
     className="search-input p-2 w-[300px] rounded-2xl outline-none"
   />
-  <span className='w-[0.5px] h-[32px] bg-[#0F0F0F] absolute translate-x-2 translate-y-1'></span>
+  <span className='w-[1px] h-[32px] bg-[#0F0F0F] bg-opacity-35 absolute translate-x-2 translate-y-1'></span>
   <button type="submit" className="search-button absolute translate-x-4 translate-y-1">
     <SearchIcon/>
   </button>

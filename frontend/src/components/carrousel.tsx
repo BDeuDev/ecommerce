@@ -37,7 +37,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, width = '100%' }) => {
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index+1}>
-            <img src={image} alt={`slide-${index}`} style={imageStyle} className=' shadow-2xl' />
+            <img src={image} alt={`slide-${index}`} style={imageStyle}  />
           </div>
         ))}
       </Slider>
