@@ -44,7 +44,7 @@ const Register = () => {
 
     return (
         <div className="w-full h-full bg-[#F0F0F0] absolute font-raleway flex justify-center items-center">
-            <form onSubmit={handleSubmit} className="bg-white p-4 rounded-xl border-black border w-full max-w-sm mx-auto">
+            <form onSubmit={handleSubmit} className="bg-white p-4 rounded-xl  w-full max-w-sm mx-auto">
                 <div className="flex flex-col items-center justify-center mb-5">
                     <h1 className="text-black text-3xl font-bold">Create account</h1>
                 </div>
@@ -62,7 +62,7 @@ const Register = () => {
                     </div>
                 ))}
                 <div className="mx-2 mt-5">
-                    <input type="submit" value="Continue" className="cursor-pointer border text-lg font-bold p-3 rounded-xl w-full transition-all duration-700 ease-in-out transform text-white bg-[#4E7AB5] hover:text-black hover:bg-white hover:outline-1 hover:outline shadow-md" />
+                    <input type="submit" value="Continue" className="cursor-pointer border text-lg font-bold p-3 rounded-xl w-full transition-all duration-700 ease-in-out transform text-white bg-[#143D59] bg-opacity-90 hover:bg-opacity-100 hover:outline-1 hover:outline shadow-md" />
                 </div>
             </form>
         </div>

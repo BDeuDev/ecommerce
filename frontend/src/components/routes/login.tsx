@@ -43,7 +43,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-full  absolute font-raleway flex justify-center items-center">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-2xl  w-full max-w-sm mx-auto">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl border-gray-500  w-full max-w-sm mx-auto">
         <div className="flex flex-col items-center justify-center mb-5">
           <h1 className="text-black text-3xl font-bold">Sign In</h1>
         </div>
@@ -60,7 +60,15 @@ const Login = () => {
           </div>
         ))}
         <div className="mx-2 mt-5">
-          <input type="submit" value="Continue" className="cursor-pointer border text-lg font-bold p-3 rounded-xl w-full transition-all duration-700 ease-in-out transform text-white bg-black hover:text-black hover:bg-white hover:outline-1 hover:outline shadow-md" />
+          <input type="submit" value="Continue" className="cursor-pointer border text-lg font-bold p-3 rounded-xl w-full transition-all duration-700 ease-in-out transform text-white bg-[#143D59] bg-opacity-90 hover:bg-opacity-100 hover:outline-1 hover:outline shadow-md" />
+        </div>
+        <div className="flex flex-row items-center justify-center mt-5 mb-2 text-sm font-light text-gray-500">
+            <span className="w-1/3 h-[1px] bg-gray-500 bg-opacity-35"></span>
+            <p className="mx-2">New here?</p>
+            <span className="w-1/3 h-[1px] bg-gray-500 bg-opacity-35"></span>
+        </div>
+        <div className="flex flex-col justify-center items-center">
+            <p onClick={()=>navigate('/register')} className="text-blue-500 cursor-pointer p-2 underline font-medium">Create account</p>
         </div>
       </form>
     </div>
