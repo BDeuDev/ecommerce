@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
+import { validateData } from "../../auth/joiHandler/joiHandler";
+import registerSchema from "../../auth/schemas/register";
 
 const Register = () => {
     const labels: string[] = [
@@ -36,7 +38,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         newErrors.password = 'La contraseña es requerida';
     }
     setErrors(newErrors);
-
+    validateData(formData,registerSchema)
     if(Object.keys(newErrors).length === 0 ){
         try {
             const response = await axios.post('http://localhost:3000/user/register', formData);
@@ -71,12 +73,12 @@ return (
                     <label htmlFor={`${names[index]}`} className="text-sm font-bold">{text}</label>
                     <input
                         type={index === 4 ? 'password' : 'text'}
-                        className="p-1 text-base rounded-lg shadow-sm outline-1 w-full border"
+                        className="p-1 text-base rounded-lg shadow-sm outline-1 w-full border mb-2"
                         placeholder={placeholders[index]}
                         name={`${names[index]}`}
                         onChange={handleInputChange}
                     />
-                    {errors[names[index]] && <span style={{ color: 'red' }}>{errors[names[index]]}</span>}
+                    {errors[names[index]] && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm">{errors[names[index]]}</span>}
                 </div>
             ))}
             <div className="mx-2 mt-5">
