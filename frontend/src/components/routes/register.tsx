@@ -27,19 +27,15 @@ const Register = () => {
     ];
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [errores,setErrores] = useState<any>()
 
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newErrors: { [key: string]: string } = {};
-    if (!formData.username) {
-        newErrors.username = 'El nombre de usuario es requerido';
-    }
-    if (!formData.password) {
-        newErrors.password = 'La contraseña es requerida';
-    }
-    setErrors(newErrors);
-    validateData(formData,registerSchema)
-    if(Object.keys(newErrors).length === 0 ){
+
+   const result = await validateData(formData,registerSchema)
+   setErrores(result)
+
+    if(Object.keys(result).length === 0 ){
         try {
             const response = await axios.post('http://localhost:3000/user/register', formData);
             console.log(response.data);
@@ -49,18 +45,21 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     }
 };
 
+
+
 const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(errores)
     setFormData({
         ...formData,
         [event.target.name]: event.target.value
     });
-
-    // Limpiar el mensaje de error cuando se modifica el input
-    setErrors({
-        ...errors,
+    
+    /* setErrores({
+        ...errores,
         [event.target.name]: '',
-    });
+    }); */
 };
+
 
 return (
     <div className="w-full h-full bg-[#F0F0F0] absolute font-raleway flex justify-center items-center">
@@ -69,16 +68,16 @@ return (
                     <h1 className="text-black text-3xl font-bold">Create account</h1>
                 </div>
             {labels.map((text, index) => (
-                <div key={index} className="mx-2 my-3">
+                <div key={index} className="mx-2 my-1">
                     <label htmlFor={`${names[index]}`} className="text-sm font-bold">{text}</label>
                     <input
                         type={index === 4 ? 'password' : 'text'}
-                        className="p-1 text-base rounded-lg shadow-sm outline-1 w-full border mb-2"
+                        className="p-1 text-base rounded-lg shadow-sm outline-1 w-full border mb-1"
                         placeholder={placeholders[index]}
                         name={`${names[index]}`}
                         onChange={handleInputChange}
                     />
-                    {errors[names[index]] && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm">{errors[names[index]]}</span>}
+                    {errores && errores[index]?.path[0] === names[index] && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm">{errores[index]?.message}</span>}
                 </div>
             ))}
             <div className="mx-2 mt-5">
