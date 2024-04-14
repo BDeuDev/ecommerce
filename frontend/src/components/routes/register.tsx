@@ -28,32 +28,14 @@ const Register = () => {
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
 /*     const [errors, setErrors] = useState<{ [key: string]: string }>({}); */
     const [errores,setErrores] = useState<any>();
-    interface Campos {
-        username?: boolean;
-        name?: boolean;
-        lastname?: boolean;
-        email?: boolean;
-        password?: boolean;
-      }
-    const [campos,setCampos] = useState<Campos>({});
-
-const validarCampo = async () => {
-    errores?.map((text:any,index:any)=>{
-        console.log(text.path[0])
-        //Crear una funcion y schemas para cada input de forma individual
-        //formdata.username etc
-    })
     
-    
-}
 
 const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await validarCampo()
-    console.log(campos)
+    console.log(formData.username)
    const result = await validateData(formData,registerSchema)
    setErrores(result)
-/*     console.log(result) */
+
     if(Object.keys(result).length === 0 ){
         try {
             const response = await axios.post('http://localhost:3000/user/register', formData);
@@ -64,20 +46,24 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     }
 };
 
-
+const test = (text:string) => {
+    if(text){
+        return true
+    }
+    
+}
 
 const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  /*  console.log(errores) */ 
  
     setFormData({
         ...formData,
         [event.target.name]: event.target.value
     });
     
-    /* setErrores({
+     setErrores({
         ...errores,
         [event.target.name]: '',
-    }); */
+    });
 };
 
 
@@ -97,7 +83,7 @@ return (
                         name={`${names[index]}`}
                         onChange={handleInputChange}
                     />
-                   
+                   {test(names[index]) && <span>Holas</span>}
                     {errores && errores[index]?.path[0] === names[index] && 
                         <span 
                             className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm">
