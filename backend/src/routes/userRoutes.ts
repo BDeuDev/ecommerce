@@ -1,14 +1,14 @@
 
 import express from 'express';
 import registerData from '../auth/middlewares/registerData';
+import existingUser from '../auth/middlewares/existingUser';
+import registerUser from '../auth/middlewares/registerUser';
 
 
 const router = express.Router();
 
 
-router.post(`/register`, registerData,async(req,res)=>{
-    res.status(200).json({Ok:'ok'})
-});
+router.post(`/register`, registerData,existingUser,registerUser);
 
 
 

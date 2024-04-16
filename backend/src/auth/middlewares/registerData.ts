@@ -1,5 +1,5 @@
 import validateData from "../handlers/joi";
-import RegisterData from "../schemas/registerData";
+import registerSchema from "../schemas/register";
 import { Request, Response } from 'express';
 
 const registerData = async (req: Request, res: Response, next: any) => {
@@ -9,7 +9,7 @@ const registerData = async (req: Request, res: Response, next: any) => {
 
       const data = { username: username, name: name, lastname: lastname, email: email, password: password }
   
-      validateData(data, RegisterData)
+      validateData(data, registerSchema)
         .then((value) => {
           if (value) return res.status(400).json({ error: 'Invalid data entry' })
           else return next();

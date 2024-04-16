@@ -4,7 +4,7 @@ import User from "../models/User";
 async function createUser (username:string,name:string,lastname:string,email:string,password:string){
     try {
       const hashPassword = await bcrypt.encrypt(password);
-      const newUser = await User.create({
+      await User.create({
         username,
         name,
         lastname,
@@ -12,8 +12,13 @@ async function createUser (username:string,name:string,lastname:string,email:str
         password:hashPassword,
       });
   
-      return {success:true};
+      return {state:'User created'};
     } catch (error) {
       return console.error('Error al crear el usuario:', error);
     }
   };
+  async function userExists(username: string) {
+    const userExist = await User.findOne({ where: { username } });
+    return userExist;
+  }
+  export  {createUser,userExists}

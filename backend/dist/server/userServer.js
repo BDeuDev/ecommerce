@@ -12,24 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.userExists = exports.createUser = void 0;
 const bcrypt_1 = __importDefault(require("../auth/handlers/bcrypt"));
 const User_1 = __importDefault(require("../models/User"));
 function createUser(username, name, lastname, email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const hashPassword = yield bcrypt_1.default.encrypt(password);
-            const newUser = yield User_1.default.create({
+            yield User_1.default.create({
                 username,
                 name,
                 lastname,
                 email,
                 password: hashPassword,
             });
-            return { success: true };
+            return { state: 'User created' };
         }
         catch (error) {
             return console.error('Error al crear el usuario:', error);
         }
     });
 }
+exports.createUser = createUser;
 ;
+function userExists(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userExist = yield User_1.default.findOne({ where: { username } });
+        return userExist;
+    });
+}
+exports.userExists = userExists;

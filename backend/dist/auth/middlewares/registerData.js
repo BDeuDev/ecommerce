@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const joi_1 = __importDefault(require("../handlers/joi"));
-const registerData_1 = __importDefault(require("../schemas/registerData"));
+const register_1 = __importDefault(require("../schemas/register"));
 const registerData = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, name, lastname, email, password } = req.body;
         const data = { username: username, name: name, lastname: lastname, email: email, password: password };
-        (0, joi_1.default)(data, registerData_1.default)
+        (0, joi_1.default)(data, register_1.default)
             .then((value) => {
             if (value)
                 return res.status(400).json({ error: 'Invalid data entry' });
