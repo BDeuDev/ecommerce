@@ -74,7 +74,6 @@ const Register = () => {
 
     };
 
-
     return (
         <div className="w-full h-full bg-[#F0F0F0] absolute font-raleway flex justify-center items-center">
             <form onSubmit={handleSubmit} className="bg-white p-4 rounded-xl w-full max-w-sm mx-auto">

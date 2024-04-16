@@ -1,63 +1,52 @@
-
 import Joi from 'joi';
+
+// Individual validation schemas with translated and shortened messages
 export const username = Joi.string().alphanum().min(3).max(30).required().messages({
-  'string.base': 'El nombre de usuario debe ser un texto',
-  'string.empty': 'El nombre de usuario no puede estar vacío',
-  'string.min': 'El nombre de usuario debe tener al menos {#limit} caracteres',
-  'string.max': 'El nombre de usuario no puede tener más de {#limit} caracteres',
-  'any.required': 'El nombre de usuario es requerido',
-})
-export const name =Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]{3,30}$')).required().messages({
-  'string.empty': 'El nombre no puede estar vacío',
-  'string.pattern.base': 'El campo name debe contener solo letras y tener entre 3 y 30 caracteres.',
-  'any.required': 'El campo name es obligatorio.',
-})
-export const lastname =  Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]{3,30}$')).required().messages({
-  'string.empty': 'El apellido no puede estar vacío',
-  'string.pattern.base': 'El campo lastname debe contener solo letras y tener entre 3 y 30 caracteres.',
-  'any.required': 'El campo lastname es obligatorio.',
-})
-export const email = Joi.string().pattern(new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')).required().messages({
-  'string.email': 'El formato del correo electrónico no es válido',
-  'any.required': 'El correo electrónico es requerido',
-  'string.pattern.base': 'Direccion de correo electronico no valido',
-  'string.empty': 'El correo electrónico no puede estar vacío',
-})
-export const password =  Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages({
-  'string.empty': 'La contraseña no puede estar vacía',
-  'string.pattern.base': 'El campo password debe contener solo letras y números y tener entre 3 y 30 caracteres.',
-  'any.required': 'El campo password es obligatorio.',
-})
-
-export const registerSchema = Joi.object({
-    username: Joi.string().alphanum().min(3).max(30).required().messages({
-        'string.base': 'El nombre de usuario debe ser un texto',
-        'string.empty': 'El nombre de usuario no puede estar vacío',
-        'string.min': 'El nombre de usuario debe tener al menos {#limit} caracteres',
-        'string.max': 'El nombre de usuario no puede tener más de {#limit} caracteres',
-        'any.required': 'El nombre de usuario es requerido',
-    }),
-    name: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]{3,30}$')).required().messages({
-        'string.empty': 'El nombre no puede estar vacío',
-        'string.pattern.base': 'El campo name debe contener solo letras y tener entre 3 y 30 caracteres.',
-        'any.required': 'El campo name es obligatorio.',
-      }),
-    lastname: Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]{3,30}$')).required().messages({
-        'string.empty': 'El apellido no puede estar vacío',
-        'string.pattern.base': 'El campo lastname debe contener solo letras y tener entre 3 y 30 caracteres.',
-        'any.required': 'El campo lastname es obligatorio.',
-      }),
-        email: Joi.string().pattern(new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/')).required().messages({
-            'string.email': 'El formato del correo electrónico no es válido',
-            'any.required': 'El correo electrónico es requerido',
-            'string.empty': 'El correo electrónico no puede estar vacío',
-        }), 
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required().messages({
-        'string.empty': 'La contraseña no puede estar vacía',
-        'string.pattern.base': 'El campo password debe contener solo letras y números y tener entre 3 y 30 caracteres.',
-        'any.required': 'El campo password es obligatorio.',
-      }),
-
+  'string.base': 'Username must be a text',
+  'string.empty': 'Username cannot be empty',
+  'string.min': 'Username must be at least {#limit} characters long',
+  'string.max': 'Username cannot exceed {#limit} characters',
+  'any.required': 'Username is required',
 });
 
-/* export default {username,name,lastname,email,password}; */
+export const name = Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]+$')).min(3).max(30).required().messages({
+  'string.empty': 'Name cannot be empty',
+  'string.pattern.base': 'Name must contain only letters',
+  'string.min': 'Name must be at least {#limit} characters long',
+  'string.max': 'Name cannot exceed {#limit} characters',
+  'any.required': 'Name is required',
+});
+
+export const lastname = Joi.string().pattern(new RegExp('^[a-zA-ZÀ-ÖØ-öø-ÿ]+$')).min(3).max(30).required().messages({
+  'string.empty': 'Last name cannot be empty',
+  'string.pattern.base': 'Lastname must contain only letters',
+  'string.min': 'Lastname must be at least {#limit} characters long',
+  'string.max': 'Lastname cannot exceed {#limit} characters',
+  'any.required': 'Last name is required',
+});
+
+export const email = Joi.string().pattern(new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')).required().messages({
+  'string.empty': 'Email cannot be empty',
+  'string.email': 'Invalid email format',
+  'string.pattern.base': 'Invalid email address',
+  'any.required': 'Email is required',
+});
+
+export const password = Joi.string().pattern(new RegExp('^[a-zA-Z0-9]+$')).min(8).max(30).required().messages({
+  'string.empty': 'Password cannot be empty',
+  'string.pattern.base': 'Password must contain only letters and numbers',
+  'string.min': 'Password must be at least {#limit} characters long',
+  'string.max': 'Password cannot exceed {#limit} characters',
+  'any.required': 'Password is required',
+});
+
+// Combined validation schema with translated and shortened messages
+export const registerSchema = Joi.object({
+  username,
+  name,
+  lastname,
+  email,
+  password,
+}).messages({
+  'object.unknown': 'Invalid field',
+});
