@@ -19,14 +19,14 @@ const existingUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const end = perf_hooks_1.performance.now();
         console.log(`Execution time: ${end - start} ms`);
         if (doesUserExist) {
-            res.status(409).json({ error: 'User already exists' }); // 409 Conflict is more appropriate for resource already exists
+            res.status(409).json({ error: 'User already exists' });
         }
         else {
             next();
         }
     }
     catch (err) {
-        console.error(err); // Log the error for debugging
+        console.error(err);
         res.status(500).json({ error: 'Internal server error', details: err });
     }
 });

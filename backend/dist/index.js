@@ -36,5 +36,5 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use('/products', productsRoutes_1.default);
-app.use(`/`, userRoutes_1.default);
+app.use(`/user`, userRoutes_1.default);
 app.listen(3000, () => console.log('Server is running on port 3000'));

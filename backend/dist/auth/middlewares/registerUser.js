@@ -17,7 +17,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(200).json(user);
     }
     catch (err) {
-        return res.status(500).json({ error: 'Error al crear el usuario.' });
+        return res.status(500).json({ error: 'Error creating user' });
     }
 });
 exports.default = registerUser;

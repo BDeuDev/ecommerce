@@ -8,7 +8,7 @@ const registerUser = async (req: Request, res: Response) => {
         const user = await createUser(username, name, lastname, email, password);
         return res.status(200).json(user);
     } catch (err) {
-        return res.status(500).json({ error: 'Error al crear el usuario.' });
+        return res.status(500).json({ error: 'Error creating user' });
     }
 }
 export default registerUser;

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
 import { validateData } from "../../auth/joiHandler/joiHandler";
-import { username, name, lastname, email, password, registerSchema } from "../../auth/schemas/register"
+import { username, name, lastname, email, password, registerSchema } from "../../auth/schemas/register";
+import { useNavigate } from "react-router";
 const Register = () => {
     const labels: string[] = [
         'Username',
@@ -31,31 +32,43 @@ const Register = () => {
         email,
         password
     ]
-    /* console.log(schemas[0]) */
-    const [formData, setFormData] = useState<{ [key: string]: string }>({});
-    /*     const [errors, setErrors] = useState<{ [key: string]: string }>({}); */
-    const [errores, setErrores] = useState<any>();
 
+    interface ValidationError {
+        message: string;
+        path: string[];
+        type: string;
+    }
+
+    const [formData, setFormData] = useState<{ [key: string]: string }>({});
+    const [errores, setErrores] = useState<ValidationError>();
+    const [message, setMessage] = useState<any>()
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        /*  console.log(formData[names[0]]) */
         const result = await validateData(formData, registerSchema)
         setErrores(result)
 
-        /* if(Object.keys(result).length === 0 ){
-            try {
-                const response = await axios.post('http://localhost:3000/user/register', formData);
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error al enviar los datos al servidor:', error);
-            }
-        } */
+        if (!errores) {
+
+            await axios.post('http://localhost:3000/user/register', formData)
+                .then((res) => console.log(res.data))
+                .catch((err) => {
+                    if(err.response.status === 409){
+                        setMessage(err.response.data.error)
+                        console.log(message)
+                    }
+                    if(err.response.status === 400){
+
+                    }
+                })
+
+        }
     };
 
     const inputCheck = (data: string, index: number) => {
         if (data) {
-            const { error } = schemas[index]?.validate(data)
+            const { error } = schemas[index].validate(data)
             if (error) {
                 return <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm"
                 >{error.message}</span>
@@ -71,6 +84,7 @@ const Register = () => {
             ...formData,
             [event.target.name]: event.target.value
         });
+        /* setMessage() */
 
     };
 
@@ -91,6 +105,8 @@ const Register = () => {
                             onChange={handleInputChange}
                             autoComplete="off"
                         />
+                        {index === 0 && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm"
+                >{message}</span>}
                         {inputCheck(formData[names[index]], index)}
                     </div>
                 ))}
