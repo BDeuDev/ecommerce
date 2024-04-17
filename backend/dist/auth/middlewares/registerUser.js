@@ -12,8 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const userServer_1 = require("../../server/userServer");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, name, lastname, email, password } = req.body;
-    (0, userServer_1.createUser)(username, name, lastname, email, password)
-        .then(user => res.status(200).json(user))
-        .catch(err => res.status(500).json({ error: err.message }));
+    try {
+        const user = yield (0, userServer_1.createUser)(username, name, lastname, email, password);
+        return res.status(200).json(user);
+    }
+    catch (err) {
+        return res.status(500).json({ error: 'Error al crear el usuario.' });
+    }
 });
 exports.default = registerUser;

@@ -17,18 +17,16 @@ const register_1 = __importDefault(require("../schemas/register"));
 const registerData = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, name, lastname, email, password } = req.body;
-        const data = { username: username, name: name, lastname: lastname, email: email, password: password };
-        (0, joi_1.default)(data, register_1.default)
-            .then((value) => {
-            if (value)
-                return res.status(400).json({ error: 'Invalid data entry' });
-            else
-                return next();
-        })
-            .catch(err => res.status(500).json({ error: err }));
+        const data = { username, name, lastname, email, password };
+        const isValid = yield (0, joi_1.default)(data, register_1.default);
+        if (isValid) {
+            return res.status(400).json({ error: 'Invalid data entry' });
+        }
+        next();
     }
     catch (err) {
-        res.status(500).json({ error: 'Error interno del servidor : ', err });
+        console.error('Error interno del servidor:', err);
+        res.status(500).json({ error: 'Error interno del servidor' });
     }
 });
 exports.default = registerData;

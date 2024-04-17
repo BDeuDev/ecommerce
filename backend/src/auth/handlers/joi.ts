@@ -3,7 +3,7 @@ import DataType from '../../types/dataType';
 
 async function validateData(data: DataType, schema: Joi.ObjectSchema<any>) {
     try {
-        const { error } = schema.validate(data);
+        const {error} = schema.validate(data);
 
         if (error) return true
         else return false
