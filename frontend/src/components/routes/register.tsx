@@ -89,8 +89,8 @@ const Register = () => {
                     <div className="bg-green-400 text-green-600 bg-opacity-25 p-4 rounded-xl font-bold text-3xl my-2">
                         <h1>User created!😃</h1>
                     </div>
-                    <div className="my-2 text-xl">
-                        <h1 className="text-gray-500">
+                    <div className="my-2 text-lg">
+                        <h1 className="text-gray-500 font-extralight">
                             Now you can <button onClick={()=>navigate('/login')} className="text-sky-600 font-bold underline p-2">Sign In</button>
                         </h1>
                     </div>
