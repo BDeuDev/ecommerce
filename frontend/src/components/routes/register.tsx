@@ -3,6 +3,8 @@ import axios from 'axios';
 import { validateData } from "../../auth/joiHandler/joiHandler";
 import { username, name, lastname, email, password, registerSchema } from "../../auth/schemas/register";
 import { useNavigate } from "react-router";
+import IMessage from "../../interfaces/IMessage";
+import IValidationError from "../../interfaces/IValidationError";
 const Register = () => {
     const labels: string[] = [
         'Username',
@@ -33,17 +35,8 @@ const Register = () => {
         password
     ]
 
-    interface ValidationError {
-        message: string;
-        path: string[];
-        type: string;
-    }
-    interface IMessage {
-        message:string;
-        display:boolean;
-    }
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
-    const [errores, setErrores] = useState<ValidationError>();
+    const [errores, setErrores] = useState<IValidationError>();
     const [message, setMessage] = useState<IMessage>()
     const navigate = useNavigate();
 
