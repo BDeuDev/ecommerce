@@ -38,10 +38,13 @@ const Register = () => {
         path: string[];
         type: string;
     }
-
+    interface IMessage {
+        message:string;
+        display:boolean;
+    }
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
     const [errores, setErrores] = useState<ValidationError>();
-    const [message, setMessage] = useState<any>()
+    const [message, setMessage] = useState<IMessage>()
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,8 +58,8 @@ const Register = () => {
                 .then((res) => console.log(res.data))
                 .catch((err) => {
                     if(err.response.status === 409){
-                        setMessage(err.response.data.error)
-                        console.log(message)
+                        setMessage({message:err.response.data.error,display:true})
+                        console.log(message?.message)
                     }
                     if(err.response.status === 400){
 
@@ -84,7 +87,7 @@ const Register = () => {
             ...formData,
             [event.target.name]: event.target.value
         });
-        /* setMessage() */
+        setMessage({message:'',display:false})
 
     };
 
@@ -105,8 +108,8 @@ const Register = () => {
                             onChange={handleInputChange}
                             autoComplete="off"
                         />
-                        {index === 0 && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm"
-                >{message}</span>}
+                        {index === 0 && message?.display && <span className="text-red-600 bg-red-400 p-1 bg-opacity-25 font-semibold rounded-md text-sm"
+                >{message?.message}</span>}
                         {inputCheck(formData[names[index]], index)}
                     </div>
                 ))}
