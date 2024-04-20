@@ -20,7 +20,6 @@ const authorization = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(200).json({ token });
     }
     catch (err) {
-        /* console.error('Error al autorizar', err) */
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });

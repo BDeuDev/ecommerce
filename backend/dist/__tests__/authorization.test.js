@@ -28,7 +28,6 @@ describe('authorization middleware', () => {
         // Verificar que se llame a res.status con el código 200 y res.json con el token esperado
         expect(mockRes.status).toHaveBeenCalledWith(200);
         expect(mockRes.json).toHaveBeenCalledWith({ token: 'mockedToken' });
-        // Verificar que next no se llame
     }));
     it('should respond with an error if authorization fails', () => __awaiter(void 0, void 0, void 0, function* () {
         // Simulación de la función tokenSing que arroja un error
@@ -37,6 +36,5 @@ describe('authorization middleware', () => {
         // Verificar que se llame a res.status con el código 500 y res.json con el mensaje de error
         expect(mockRes.status).toHaveBeenCalledWith(500);
         expect(mockRes.json).toHaveBeenCalledWith({ error: 'Error interno del servidor' });
-        // Verificar que next no se llame
     }));
 });
