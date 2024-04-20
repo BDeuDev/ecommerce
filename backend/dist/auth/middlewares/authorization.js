@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt_1 = __importDefault(require("../handlers/jwt"));
-const authorization = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const authorization = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username } = req.body;
         const token = yield jwt_1.default.tokenSing(username);
         res.status(200).json({ token });
     }
     catch (err) {
-        console.error('Error al autorizar', err);
+        /* console.error('Error al autorizar', err) */
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 });

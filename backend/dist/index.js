@@ -34,6 +34,16 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const url_1 = require("./config/url");
 dotenv.config();
 const app = (0, express_1.default)();
+//Mañana
+//Terminar QA
+//Inicio de sesion(Guardar tokens en session storage o local storage)
+//Enviar el token eun header de respuesta haciendo un get a nuestro endpoint
+//Almacenar en redux el state del user (logged o no)
+//y los datos del user en base a el token
+//En caso de no existir token proteger la vista del carrito para que no puedan comprar
+//el buscador siempre debe estar operativo
+//1/05 empezar con el buscador)
+//Fecha limite para terminar este proyecto 20/05
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use('/products', productsRoutes_1.default);
