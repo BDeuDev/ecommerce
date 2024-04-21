@@ -15,9 +15,8 @@ import { performance } from 'perf_hooks';
         } else {
             next();
         }
-    } catch (err) {
-        console.error(err); 
-        res.status(500).json({ error: 'Internal server error', details: err });
+    } catch (err) { 
+        res.status(500).json({ error: 'Internal server error'});
     }
 }
 

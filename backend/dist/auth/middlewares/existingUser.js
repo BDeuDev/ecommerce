@@ -26,8 +26,7 @@ const existingUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         }
     }
     catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal server error', details: err });
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 exports.default = existingUser;
