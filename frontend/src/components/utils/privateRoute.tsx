@@ -1,23 +1,17 @@
 import React from 'react';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store'; // Definir RootState según tu configuración de Redux
+import { Navigate } from "react-router-dom";
+import { RouteProps } from 'react-router-dom';
+/* import { useSelector } from 'react-redux';
+import { RootState } from '../store';  */// Ajusta la importación según tu configuración de Redux
 
-interface PrivateRouteProps extends RouteProps {
+interface PrivateRouteProps extends Omit<RouteProps, 'component'> {
   component: React.ComponentType<any>;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component, ...rest }) => {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-  );
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ component: Component }) => {
+ /* const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated); */
+ const isAuthenticated = false
+ 
+  return isAuthenticated ? <Component /> : <Navigate to="/login" />;
 };
-
 export default PrivateRoute;
