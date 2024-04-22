@@ -18,6 +18,7 @@ const app = express();
 //el buscador siempre debe estar operativo
 //1/05 empezar con el buscador)
 //Fecha limite para terminar este proyecto 20/05
+//fecha inicio 22
 app.use(express.json());
 app.use(cors());
 app.use('/products',productsRoutes)
