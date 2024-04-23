@@ -1,6 +1,10 @@
 import { useState } from "react";
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import {login} from '../../redux/authSlice'
 import { useNavigate } from "react-router";
+import IDecodedToken from "../../interfaces/IDecodedToken";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const labels: string[] = [
@@ -13,7 +17,7 @@ const Login = () => {
   ];
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -30,8 +34,10 @@ const Login = () => {
         if (token) {
           sessionStorage.clear();
           sessionStorage.setItem('token', token);
-
-          navigate("/profile");
+          const decodedToken = jwtDecode<IDecodedToken>(token);
+          const userData = { username: decodedToken.username};
+          dispatch(login(userData));
+          navigate("/");
         } else {
           console.log('Usuario no válido');
         }
@@ -68,7 +74,7 @@ const Login = () => {
             <span className="w-1/3 h-[1px] bg-gray-500 bg-opacity-35"></span>
         </div>
         <div className="flex flex-col justify-center items-center">
-            <p onClick={()=>navigate('/register')} className="text-blue-500 cursor-pointer p-2 underline font-medium">Create account</p>
+            <button onClick={()=>navigate('/register')} className="text-blue-500 cursor-pointer p-2 underline font-medium">Create account</button>
         </div>
       </form>
     </div>
@@ -76,3 +82,7 @@ const Login = () => {
 }
 
 export default Login;
+
+function dispatch(arg0: { payload: any; type: "auth/login"; }) {
+  throw new Error("Function not implemented.");
+}
